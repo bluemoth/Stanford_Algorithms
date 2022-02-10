@@ -15,3 +15,48 @@ Keep in mind memory management due to file size...
 '''
 
 
+
+
+def DFS(G, vertex, visited, stack):
+    if vertex not in visited:
+        # mark vertex as explored
+        visited.append(vertex)
+        print(vertex)
+    # for every edge (s, v)
+        for edge in G[vertex]:
+            DFS(G, edge, visited, stack)
+
+
+
+
+def main():
+    test1File = "Module2/SCC/input_mostlyCycles_10_32.txt" # should return 11, 10, 5, 4, 1
+    test2File = "Module2/SCC/input_mostlyCycles_20_128.txt" # should return 61, 46, 15, 3, 2
+    test3File = "Module2/SCC/input_mostlyCycles_1_8.txt" # should return 4, 2, 2, 0, 0
+    homeworkFile = "Module2/SCC/scc.txt"
+
+    fileName = test3File
+    graph_file = open(fileName)
+    # define empty graph using a dictionary type
+    graph = {}
+
+    topFive = []
+    visitedNodes = []
+    stackElements = []
+
+    for line in graph_file:
+        node = int(line.split()[0])
+        edges = []
+        for edge in line.split()[1]:
+            edges.append(int(edge))
+        graph[node] = edges
+    graph_file.close
+
+    print(graph)
+        
+
+
+
+    print("main")
+
+main()

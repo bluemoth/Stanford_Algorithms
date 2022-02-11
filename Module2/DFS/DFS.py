@@ -1,6 +1,8 @@
 '''
 Depth first search algorithm, coded based on Stanford Algo's lecture material.
-DFS to use a stack rather than a queue (BFS)
+DFS to use a stack rather than a queue (BFS). 
+
+Recursive approach found in slides.
 '''
 
 def DFS(G, vertex, visited, s):

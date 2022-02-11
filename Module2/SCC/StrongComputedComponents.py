@@ -7,71 +7,75 @@ File format (directed graph):
 Example:
 11th row => "2 47646", meaning vertex with label 2 has an outgoing edge to vertex label 47646
 
-Instructions: Use SCC algorithm from lecture (will choose DFS slick method)
+Instructions: Use SCC algorithm from lecture 
+Make sure when using DFS procedures, iterative (stack) approach is taken rather than recursive
 
 Output:
 output the sizes of the 5 largest SCCs in the given graph, in decreasing order sizes, separated by commas. 
 Keep in mind memory management due to file size... 
 '''
 
-import copy
-
-
-def DFS(G, vertex, visited, stack):
-    if vertex not in visited:
-        # mark vertex as explored
-        visited.append(vertex)
-        print(vertex)
-    # for every edge (s, v)
-        for edge in G[vertex]:
-            DFS(G, edge, visited, stack)
-
+def DFS_iter(Graph, start, explored, stack):
+    vertex = start
+    stack.append(vertex)
+    while stack:
+        u = stack.pop(0)
+        if u not in explored:
+            explored.append(u)
+            stack = Graph[u] + stack
 
 def main():
+    # file names
     test1File = "Module2/SCC/input_mostlyCycles_10_32.txt" # should return 11, 10, 5, 4, 1
     test2File = "Module2/SCC/input_mostlyCycles_20_128.txt" # should return 61, 46, 15, 3, 2
     test3File = "Module2/SCC/input_mostlyCycles_1_8.txt" # should return 4, 2, 2, 0, 0
     homeworkFile = "Module2/SCC/scc.txt"
 
-    fileName = homeworkFile
-    
+      # node counts per text file
+    test1NodeCount = 128
+    test2NodeCount = 30
+    test3NodeCount = 9
+    maxNodeCount = 875715
+
+    # create edge lists that will later be used to populate graph adj list
+    g_edgeList = [[] for i in range(test3NodeCount)]
+    r_g_edgeList = [[] for i in range(test3NodeCount)]
+
     # define empty graph using a dictionary type
     graph = {}
-    reverse_graph = {}
+    rev_graph = {}
 
-    num_nodes = 0
-    topFive = []
-    visitedNodes = []
-    stackElements = []
-
-
+    # file to open
+    fileName = test3File
     graph_file = open(fileName)
-    # variables to hold node/edge data from file contents
-    edgeList = []
-    nodeNum = 1 #start at node1 since all text files start there
 
-    # Below steps will create a normal graph struct: Graph{Node: [edges]}
+    # generate edge lists from file
     for line in graph_file:
         items = line.split()
-        # if node number matches first column node
-        if nodeNum == int(items[0]):
-            # append it's edge to a running list
-            edgeList.append(int(items[1]))
-        # if node number doesn't match
-        elif nodeNum != int(items[0]):
-            # make a copy/overwrite the existing edge list
-            copyEdge = copy.deepcopy(edgeList)
-            # create a graph with that deepcopied edge list
-            graph[nodeNum] = copyEdge
-            # assign new nodeNum
-            nodeNum = int(items[0])
-            # clear the edge list, but not the copyEdge since values referenced
-            edgeList.clear()
-            # append the new edge from the new nodeNum
-            edgeList.append(int((items[1])))
-        # if last node reached, just used the edgeList    
-        graph[nodeNum] = edgeList
+        g_edgeList[int(items[0])] += [int(items[1])]
+        r_g_edgeList[int(items[1])] += [int(items[0])]
+    
+    # because complaining...
+    adj_length = len(g_edgeList)
 
-# Main File Loop -------------------------------
+    # merge edge list into keys
+    for i in range(1,adj_length):
+        graph[i] = g_edgeList[i]
+
+    for i in range(1,adj_length):
+        rev_graph[i] = r_g_edgeList[i]
+
+
+    # overhead items
+    explored_list = []
+    stack_list = []
+
+    for i in range(test3NodeCount-1,0,-1):
+        DFS_iter(graph, i, explored_list, stack_list)
+
+    print(explored_list)
+    
+
+# ------------------------------- Main File Loop -------------------------------
 
 main()

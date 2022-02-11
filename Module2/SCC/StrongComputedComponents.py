@@ -14,7 +14,7 @@ output the sizes of the 5 largest SCCs in the given graph, in decreasing order s
 Keep in mind memory management due to file size... 
 '''
 
-
+import copy
 
 
 def DFS(G, vertex, visited, stack):
@@ -27,36 +27,51 @@ def DFS(G, vertex, visited, stack):
             DFS(G, edge, visited, stack)
 
 
-
-
 def main():
     test1File = "Module2/SCC/input_mostlyCycles_10_32.txt" # should return 11, 10, 5, 4, 1
     test2File = "Module2/SCC/input_mostlyCycles_20_128.txt" # should return 61, 46, 15, 3, 2
     test3File = "Module2/SCC/input_mostlyCycles_1_8.txt" # should return 4, 2, 2, 0, 0
     homeworkFile = "Module2/SCC/scc.txt"
 
-    fileName = test3File
-    graph_file = open(fileName)
+    fileName = homeworkFile
+    
     # define empty graph using a dictionary type
     graph = {}
+    reverse_graph = {}
 
+    num_nodes = 0
     topFive = []
     visitedNodes = []
     stackElements = []
 
+
+    graph_file = open(fileName)
+    # variables to hold node/edge data from file contents
+    edgeList = []
+    nodeNum = 1 #start at node1 since all text files start there
+
+    # Below steps will create a normal graph struct: Graph{Node: [edges]}
     for line in graph_file:
-        node = int(line.split()[0])
-        edges = []
-        for edge in line.split()[1]:
-            edges.append(int(edge))
-        graph[node] = edges
-    graph_file.close
+        items = line.split()
+        # if node number matches first column node
+        if nodeNum == int(items[0]):
+            # append it's edge to a running list
+            edgeList.append(int(items[1]))
+        # if node number doesn't match
+        elif nodeNum != int(items[0]):
+            # make a copy/overwrite the existing edge list
+            copyEdge = copy.deepcopy(edgeList)
+            # create a graph with that deepcopied edge list
+            graph[nodeNum] = copyEdge
+            # assign new nodeNum
+            nodeNum = int(items[0])
+            # clear the edge list, but not the copyEdge since values referenced
+            edgeList.clear()
+            # append the new edge from the new nodeNum
+            edgeList.append(int((items[1])))
+        # if last node reached, just used the edgeList    
+        graph[nodeNum] = edgeList
 
-    print(graph)
-        
-
-
-
-    print("main")
+# Main File Loop -------------------------------
 
 main()

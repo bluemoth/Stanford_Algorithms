@@ -1,6 +1,4 @@
-'''Algorithm implementation for inversion counting.
-   The algorithm to be used will be from Algorithm By Design textbook
-   Larger file contained within IntegerArray'''
+'''Algorithm implementation for inversion counting'''
 
 line_number = 0
 homeWorkList = []

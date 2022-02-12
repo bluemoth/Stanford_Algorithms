@@ -3,10 +3,7 @@ Algorithm for computing strongly connected components (Kosaraju's Two-Pass Algor
 '''
 
 #Errors/bugs:
-# input text leaves out nodes that aren't connected
-# keyErrors will appear due to this
-
-
+# fixed by checking that node exists within graph before trying to do any processing
 
 # udpdated method to pull info from file and build dictionary using set
 def build_graph(filename):
@@ -30,6 +27,8 @@ def DFS_Loop(Graph, times=0):
     global finish_time
     global s
     global explored_list
+    global stack_list
+    global leader
     global current_node_list
     # leader variable relevant on seond pass
     s = None
@@ -58,16 +57,28 @@ def DFS_recursive(Graph, start):
     global finish_time
     global s
     global explored_list
+    global stack_list
+    global leader
     global current_node_list
 
     vertex = start
     explored_list.append(vertex)
     current_node_list.append(vertex)
-    for edge in Graph[vertex]:
-        if edge not in explored_list:
-            DFS_recursive(Graph, edge)
-    finish_time += 1
-    finish_time_log[edge] = finish_time
+    if start in Graph:
+        for edge in Graph[vertex]:
+            if edge not in explored_list:
+                DFS_recursive(Graph, edge)
+        finish_time += 1
+        finish_time_log[edge] = finish_time
+
+def DFS_iterative(Graph, start):
+    global finish_time_log 
+    global finish_time
+    global s
+    global explored_list
+    global stack_list
+    global leader
+    global current_node_list
 
 def transposeGraph(Graph):
     edge_list = set()
@@ -99,6 +110,7 @@ def main():
     global explored_list
     global stack_list
     global leader
+    global current_node_list
 
     finish_time_log = {}
     leader = {}
@@ -109,13 +121,13 @@ def main():
 
     # setup - construct the graph from file
     # print("\nGraph constructed from file:")
-    graph = build_graph(filename=test3File)
+    graph = build_graph(filename=test1File)
     # print(graph, "\n")
 
     # Step 1: Create graph and reverse graph
     rev_graph = transposeGraph(graph)
     print("Graph Transposed for first pass of DFS_Loop:")
-    print(rev_graph,"\n")
+    # print(rev_graph,"\n")
 
     # Step 2: run DFS Loop on Grev -> Purpose is to compute ordering of nodes by finishing times (stord in dictionary)
     # from lecture: The depth first search on reverse graph is going to compute an ordering of the nodes which, 

@@ -25,12 +25,12 @@ def DFS_Loop(Graph, times=0):
     global explored_list
     global stack
     global leader
-    global current_node_list
+    global current_node_count
     # leader variable relevant on seond pass
     s = None
     finish_time_log = {}
     explored_list = [False] * maxNodeCount
-    current_node_list = []
+    current_node_count = []
     finish_time = 0
 
     if times == 0:
@@ -45,8 +45,8 @@ def DFS_Loop(Graph, times=0):
                 s = i
                 DFS_recursive(Graph,i)
             if s not in leader:
-                leader[s] = len(current_node_list)
-                current_node_list = []
+                leader[s] = len(current_node_count)
+                current_node_count = []
 
 # recursive setup of DFS
 def DFS_recursive(Graph, vertex):
@@ -56,10 +56,10 @@ def DFS_recursive(Graph, vertex):
     global explored_list
     global stack
     global leader
-    global current_node_list
+    global current_node_count
 
     explored_list.append(vertex)
-    current_node_list.append(vertex)
+    current_node_count.append(vertex)
     if vertex in Graph:
         for edge in Graph[vertex]:
             if explored_list[edge] == False:
@@ -74,17 +74,17 @@ def DFS_Loop_Iter(Graph, times=0):
     global explored_list
     global stack
     global leader
-    global current_node_list
+    global current_node_count
     # leader variable relevant on seond pass
     s = None
     finish_time = 0
     finish_time_log = {}
     explored_list = [False] * maxNodeCount
-    current_node_list = [] 
+    current_node_count = 0
 
     if times == 0:
         for i in Graph:
-            current_node_list = [] 
+            current_node_count = 0 
             # for each node within list, if not explored, set leader to that node
             if explored_list[i] == False:
                 s = i
@@ -95,8 +95,10 @@ def DFS_Loop_Iter(Graph, times=0):
                 s = i
                 DFS_iterative(Graph,i)
             if s not in leader:
-                leader[s] = len(current_node_list)
-                current_node_list = []
+                if current_node_count == 0:
+                    current_node_count = 1
+                leader[s] = current_node_count
+                current_node_count = 0
 
 def DFS_iterative(Graph, vertex):
     global finish_time_log 
@@ -105,7 +107,7 @@ def DFS_iterative(Graph, vertex):
     global explored_list
     global stack
     global leader
-    global current_node_list
+    global current_node_count
 
     stack = [vertex]
     while stack:
@@ -113,7 +115,7 @@ def DFS_iterative(Graph, vertex):
         if v in Graph:
             if explored_list[v] == False:
                 explored_list[v] = True
-                current_node_list.append(v)
+                current_node_count += 1
                 for w in Graph[v]:
                     stack.append(w)
             else: 
@@ -122,6 +124,9 @@ def DFS_iterative(Graph, vertex):
                     finish_time_log[v] = finish_time
                 stack.pop()
         else:
+            explored_list[v] = True
+            finish_time += 1
+            finish_time_log[v] = finish_time
             stack.pop()
             
 def transposeGraph(Graph):
@@ -158,10 +163,10 @@ def main():
     global explored_list
     global stack
     global leader
-    global current_node_list
+    global current_node_count
     global maxNodeCount
         
-    maxNodeCount = 875715 # homework # of nodes 875715
+    maxNodeCount = 11 # homework # of nodes 875715
     finish_time_log = {}
     leader = {}
     finish_time = 0
@@ -171,7 +176,7 @@ def main():
 
 
     # setup - construct the graph from file
-    graph = build_graph(filename=homeworkFile)
+    graph = build_graph(filename=test7File)
 
     # Step 1: Create graph and reverse graph
     rev_graph = transposeGraph(graph)

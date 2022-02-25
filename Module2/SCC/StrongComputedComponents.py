@@ -118,7 +118,7 @@ def main():
     test7 = "Module2/SCC/Jsemko_1.txt" # 3,3,3,0,0
     test8 = "Module2/SCC/Jsemko_2.txt" # 6,3,2,1,0    
     test9 = "Module2/SCC/MB_1.txt" # 3,1,1,0,0  
-    SCCFile = "Module2/SCC/scc.txt"
+    SCCFile = "Module2/SCC/homeworkData/scc.txt"
 
     # globals
     global finish_time_log, finish_time, s, explored_list, stack, leader, current_node_count, maxNodeCount

@@ -28,7 +28,7 @@ def build_graph(filename):
     with open(filename, 'r') as file:
         graph = dict()
         for line in file:
-            # vel -> vertex, edge, list variable
+            # vel -> vertex, edge, list holder
             vel = line.strip().strip('\n').split()
             vertex = int(vel[0])
             graph[vertex] = dict()
@@ -43,17 +43,24 @@ def Dijkstra(graph, vertex=1):
     dist = dict()
     vertex_queue = [vertex]
 
+    # for the distance list, assign each node as having an infinite distance
     for v in graph:
         dist[v] = inf
         vertex_queue.append(v)
     
     dist[vertex] = 0
 
+    # first node of vertex queue is the vertex entered in method call
     while vertex_queue:
+        # remove the first element from the queue; note that first vertex is appended twice. Once in method call, second time in for loop above. 
         vertex_queue.pop(0)
+        # for each vertex in the queue (all vertices really)
         for u in vertex_queue:
+            # look for the edges associated from selected node
             for edge in graph[u]:
+                # alt is alternative distance that we've discovered going from u to the following node in the graph (say u -> v)
                 alt = dist[u] + graph[u][edge]
+                # edge relaxation; if we disover the alternative distance is less than what we had bfore then overwrite
                 if alt < dist[edge]:
                     dist[edge] = alt
     return dist

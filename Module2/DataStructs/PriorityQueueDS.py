@@ -29,15 +29,3 @@ class PriorityQueueBase:
         def __lt__(self, other):
             '''Less than'''
             return self._key < other._key
-
-
-'''Need to incorporate sorted and unsorted pqs, along with possible locater for adaptable PQ (use in Dijkstra)'''
-
-# example declaration of pq item
-pq1 = PriorityQueueBase.item(1,2)
-print(pq1)
-
-pq2 = PriorityQueueBase.item(3,4)
-print(pq2)
-
-print(pq1 > pq2)

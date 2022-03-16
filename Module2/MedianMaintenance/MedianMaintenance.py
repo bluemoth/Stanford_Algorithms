@@ -58,7 +58,7 @@ def median_maintenance_algorithm(filename):
                 #no inbalance, can put in either
                 if num > -heap_low[0]:
                     heapq.heappush(heap_high, num)
-                    heapq.heappush(heap_low, -(heapq.heappop(heap_high)))
+                    heapq.heappush(heap_low, -(heapq.heappop(heap_high))) # step required to maintain balance; operates in O(log n)
                     runningSum += -heap_low[0]
                 else:
                     heapq.heappush(heap_low, -num)

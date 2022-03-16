@@ -25,15 +25,13 @@ t5 = ""
 homeworkFile = "Module2/MedianMaintenance/Median.txt" # numbers go from 1 to 100000, so median of this set is 5000. Split heaps based on this point
 
 def median_maintenance_algorithm(filename):
-
-    # holder for current calculated median val
-    median_list = []
     runningSum = 0 
     heap_low = [] # will be a collection of negative numbers since heapq can only support min heap types/operations
     heap_high = [] # will be a normal collection of numbers
     low_Size = 0
     high_Size = 0
 
+    print("\nTest case: ", filename, "\n")
     # file loading
     with open(filename, 'r') as file:
         for line in file:
@@ -44,40 +42,44 @@ def median_maintenance_algorithm(filename):
             if low_Size == 0:
                 heapq.heappush(heap_low, -num)
                 low_Size += 1
+                runningSum += -heap_low[0]
             elif low_Size > high_Size:
                 if num >= -heap_low[0]:
                     # case of inbalance, check new median; if greater put in high
                     heapq.heappush(heap_high, num)
+                    runningSum += -heap_low[0]
                 else:
                     # is inbalanced, but new number needs to go low; transfer top value from low to high
                     heapq.heappush(heap_high, -(heapq.heappop(heap_low)))
                     heapq.heappush(heap_low, -num)
+                    runningSum += -heap_low[0]
                 high_Size += 1
             elif low_Size == high_Size:
                 #no inbalance, can put in either
                 if num > -heap_low[0]:
-                    heapq.heappush(heap_low, -(heapq.heappop(heap_high)))
                     heapq.heappush(heap_high, num)
+                    heapq.heappush(heap_low, -(heapq.heappop(heap_high)))
+                    runningSum += -heap_low[0]
                 else:
                     heapq.heappush(heap_low, -num)
+                    runningSum += -heap_low[0]
                 low_Size += 1
 
+            #print(heap_low, heap_high)
+            #print("\n")
             
-            
-
-    print(heap_low, heap_high)
-
-            
-
-
+            #print("Median: ", -heap_low[0], "Sum: ", runningSum)
+        
+    print("Mod % 10000: ", (runningSum%10000))
+    
 def main():
     start = time.time()
 
-    median_maintenance_algorithm(t3)
-
-
-
-
+    # median_maintenance_algorithm(t1)
+    # median_maintenance_algorithm(t2)
+    # median_maintenance_algorithm(t3)
+    # median_maintenance_algorithm(t4)
+    median_maintenance_algorithm(homeworkFile)
 
     print("elapsed time: ", time.time() - start)
 

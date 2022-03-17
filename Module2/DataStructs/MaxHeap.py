@@ -1,11 +1,17 @@
 '''
-MaxHeap class
+MaxHeap class, referenced CodDevX, March 16, 2022
 
 public functions : push, peek pop
-private functions: swap, _floatUp, _bubbleDown, _str
+
+pop - Same as extract max; looks for element in 1 position and pulls it off. 
+      After extracting max value, swaps lowest position in front, then performs bubble down as needed.
+
+peek - As expected, only shows top element in 1 position
+
+push - Pushes an element to the back of the heap, then performs _floatUp as needed
 
 
-
+private functions: swap, _floatUp, _bubbleDown, _str__
 '''
 
 class MaxHeap:

@@ -6,8 +6,9 @@ input (given): array of numbers, homework file is not sorted but examples may be
 Task: Target sum 't', can be any value but for the sake of this exercise we are looking for a range [-10000:10000]. Examples can be smaller in range.
 Also to note, only care about there being a solution, not how many solutions per numbers.
 
+
+March 27, 2022 - Look into implementing a solution that builds/uses binary tree + custom hash table
 '''
-from multiprocessing import pool
 import time
 
 
@@ -160,9 +161,8 @@ def sorted2SUM(data=None, file=None, start=None, end=None):
             solution = binarySearch(val, 0, len(data)-1, data)
             if solution == True:
                 sCount +=1
-                break
-        else:    
-            start +=1
+                break  
+        start +=1
 
     return sCount
 
@@ -200,7 +200,6 @@ def main():
     print("RUNNING NAIVE SOLUTION")
     print("Number of solutions = ",naive2SUM(tc1,None,tc1_start,tc1_end))
     print("Number of solutions = ",naive2SUM(tc2,None,tc2_start,tc2_end))
-    #print("Number of solutions = ",naive2SUM(None,homeworkFile,h_start,h_end))
     start = time.time()
     print("Number of solutions = ",naive2SUM(None,tc3,h_start,h_end))
     print("Elapsed time: ", time.time() - start)
@@ -228,9 +227,9 @@ def main():
     print("Number of solutions = ", sorted2SUM(None, tc5, h_start, h_end))
     print("Elapsed time: ", time.time()-start)
 
-    start = time.time()
-    print("Number of solutions = ", sorted2SUM(None, homeworkFile, h_start, h_end))
-    print("Elapsed time: ", time.time()-start)
+    # start = time.time()
+    # print("Number of solutions = ", sorted2SUM(None, homeworkFile, h_start, h_end))
+    # print("Elapsed time: ", time.time()-start)
 
     print("\nRUNNING HASH SOLUTION")
     print("Number of solutions = ", hash2SUM(tc1, None, tc1_start, tc1_end))
@@ -247,8 +246,8 @@ def main():
     print("Number of solutions = ", hash2SUM(None, tc5, h_start, h_end))
     print("Elapsed time: ", time.time()-start)
 
-    start = time.time()
-    print("Number of solutions = ", hash2SUM(None, homeworkFile, h_start, h_end))
-    print("Elapsed time: ", time.time()-start)
+    # start = time.time()
+    # print("Number of solutions = ", hash2SUM(None, homeworkFile, h_start, h_end))
+    # print("Elapsed time: ", time.time()-start)
 
 main()

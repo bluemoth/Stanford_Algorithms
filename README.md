@@ -5,7 +5,7 @@ This repo contains submitted homeworks submitted for the Stanford Algorithms (on
 Module1 - Divide and Conquer, Sorting and Searching, and Randomized Algorithms
 <ul>
 <li>Big O notation
-<li>Multiplation (Karatsuba)
+<li>Multiplication (Karatsuba)
 <li>Karger Min-Cut Algorithm
 <li>Merge Sort
 <li>Quick Sort

@@ -1,4 +1,4 @@
-# Stanford_Algorithms
+# Stanford Algorithms Online Course
 
 This repo contains submitted homeworks submitted for the Stanford Algorithms (online) course offered through coursera. 
 

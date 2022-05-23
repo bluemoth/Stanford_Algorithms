@@ -1,6 +1,8 @@
 # Stanford Algorithms Online Course
 
-This repo contains submitted homeworks submitted for the Stanford Algorithms (online) course offered through coursera. 
+This repo contains submitted homeworks for the Stanford Algorithms (online) course offered through coursera (https://www.coursera.org/specializations/algorithms?).
+
+A very helpful class to gain understanding around algorithms, data structures, and how to think about approaching computer science problems. 
 
 Module1 - Divide and Conquer, Sorting and Searching, and Randomized Algorithms
 <ul>

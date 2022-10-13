@@ -6,7 +6,7 @@ Currently, I'm working through Module 3 (greedy algos).
 
 A very helpful class to gain understanding around algorithms, data structures, and how to think about approaching computer science problems. 
 
-Module1 - Divide and Conquer, Sorting and Searching, and Randomized Algorithms
+[Module1](https://github.com/jcase34/Stanford-Algorithms-Course/tree/main/Module1)- Divide and Conquer, Sorting and Searching, and Randomized Algorithms
 <ul>
 <li>Big O notation
 <li>Multiplication (Karatsuba)

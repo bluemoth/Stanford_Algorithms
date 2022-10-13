@@ -14,7 +14,7 @@ A very helpful class to gain understanding around algorithms, data structures, a
 <li>Quick Sort
 <li>Graph theory
 </ul>
-[Module2](https://github.com/jcase34/Stanford-Algorithms-Course/tree/main/Module1) - Graph Search, Shortest Paths, and Data Structures
+[Mode2](https://github.com/jcase34/Stanford-Algorithms-Course/tree/main/Module1) - Graph Search, Shortest Paths, and Data Structures
 <ul>
 <li>Breadth-first search
 <li>Depth-first search

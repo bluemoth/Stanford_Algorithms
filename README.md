@@ -2,7 +2,6 @@
 
 This repo contains my submitted homeworks for the Stanford Algorithms (online) course offered through coursera (https://www.coursera.org/specializations/algorithms). All homeworks were completed in Python to get a high level understanding of the content. 
 
-Currently, I'm working through Module 3 (greedy algos). 
 
 A very helpful class to gain understanding around algorithms, data structures, and how to think about approaching computer science problems. 
 
